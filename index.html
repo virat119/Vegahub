@@ -508,7 +508,7 @@
 const MONETAG = "https://otieu.com/4/10245869";
 const OMDB_API_KEY = "a4ff55fe"; 
 const OMDB_BASE_URL = "https://www.omdbapi.com/";
-const DATA_FILE_URL = '/data/movies.json'; // ðŸ”‘ NEW: JSON Data File URL
+const DATA_FILE_URL = 'data/movies.json'; // ðŸ”‘ FIXED: Relative Path
 
 // ðŸ”‘ YOUTUBE API DETAILS
 const YOUTUBE_API_KEY = "AIzaSyDT1RLcB16NDKXhkJrAPG2aeQfb464IGTA"; 
@@ -538,6 +538,8 @@ async function fetchMoviesData() {
     try {
         const response = await fetch(DATA_FILE_URL);
         if (!response.ok) {
+            // Log the full path that failed to help debugging
+            console.error(`Failed to fetch data. Status: ${response.status}. Trying to access: ${new URL(DATA_FILE_URL, window.location.href).href}`);
             throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
@@ -609,7 +611,7 @@ function setCategoryTheme(cat) {
     document.documentElement.style.setProperty('--dynamic-primary-shadow', theme.shadow);
 }
 
-// ðŸ”‘ FIX: showHome function ko History API ke saath update kiya gaya
+// ðŸ”‘ FIX: showHome function ko History API ke saath update kiya गया
 function showHome() {
     // UI ko home page par le jao
     document.getElementById('detail-page').classList.add('hidden');
