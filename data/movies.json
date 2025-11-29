@@ -1,5 +1,25 @@
 [
   {
+    "title": "Tere ishq main",
+    "imdb_id": "tt28142095",
+    "thumb": "",
+    "cat": "bollywood",
+    "quality": "HDTC",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "SERVER2",
+        "link": "HHHH"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "720 -5gb",
+        "link": "uhj"
+      }
+    }
+  },
+  {
     "title": "Titanic",
     "imdb_id": "tt0120338",
     "thumb": "",
