@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Fateh",
+    "imdb_id": "tt27679608",
+    "thumb": "https://via.placeholder.com/300x420/111/fff?text=Placeholder+Poster",
+    "cat": "bollywood",
+    "quality": "HD",
+    "year": "2024",
+    "servers": [
+        { "name": "Trailer", "link": "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    ],
+    "downloads": {
+        "q1": { "label": "720p - 1.2GB", "link": "#" }
+    }
+  }
+]
