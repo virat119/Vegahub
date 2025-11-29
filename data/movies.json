@@ -1,5 +1,45 @@
 [
   {
+    "title": "Titanic",
+    "imdb_id": "tt0120338",
+    "thumb": "",
+    "cat": "hollywood",
+    "quality": "4K",
+    "year": "1997",
+    "servers": [
+      {
+        "name": "Servrr3",
+        "link": "hh"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "720 - 2gb",
+        "link": "hh"
+      }
+    }
+  },
+  {
+    "title": "Titanic",
+    "imdb_id": "tt0120338",
+    "thumb": "",
+    "cat": "hollywood",
+    "quality": "4k",
+    "year": "1997",
+    "servers": [
+      {
+        "name": "Server1",
+        "link": "hhh"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "720 - 5gb",
+        "link": "uuuu"
+      }
+    }
+  },
+  {
     "title": "Fateh",
     "imdb_id": "tt27679608",
     "thumb": "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/2025images/_Fateh-19347d40-b94f-11ef-a67e-a1d27b80970c.jpg",
