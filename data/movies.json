@@ -1,1 +1,22 @@
-
+[
+  {
+    "title": "Fateh",
+    "imdb_id": "tt27679608",
+    "thumb": "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/2025images/_Fateh-19347d40-b94f-11ef-a67e-a1d27b80970c.jpg",
+    "cat": "bollywood",
+    "quality": "HD",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "b1 ",
+        "link": "hh"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "720 - 4.5Gb done",
+        "link": "hhhh"
+      }
+    }
+  }
+]
