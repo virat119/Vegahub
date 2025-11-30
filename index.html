@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VegaHub.pro - HD Movies 2025</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ------------------------------------- */
+    /* ðŸš€ THEME & COLOR VARIABLES (Dark Mode Default) */
+    /* ------------------------------------- */
+    :root {
+        /* General Colors */
+        --bg-color: #000;
+        --text-color: #fff;
+        --card-bg: #1a1a1a; 
+        --input-bg: #111;
+        --input-border: #333;
+        --logo-text-color: white;
+        --cat-btn-bg: #222;
+
+        /* Dynamic Primary Colors (Category-based) */
+        --dynamic-primary: #ff1493; /* Default Pink */
+        --dynamic-primary-gradient-end: #ff4500;
+        --dynamic-primary-shadow: rgba(255, 20, 147, 0.4);
+    }
+
+    /* ðŸ’¡ Light Mode (Day Mode) Fixes */
+    body.light-mode {
+        --bg-color: #f0f0f0 !important; 
+        --text-color: #111111; 
+        --card-bg: #ffffff; 
+        --input-bg: #ffffff; 
+        --input-border: #cccccc; 
+        --logo-text-color: #111111;
+        --cat-btn-bg: #e0e0e0; 
+    }
+
+    /* Global & Header */
+    body { 
+        background: var(--bg-color) !important; 
+        color: var(--text-color); 
+        font-family: 'Segoe UI', sans-serif; 
+        margin:0; 
+    }
+    .header { 
+        background: #0d0d0d; 
+        padding: 14px 0; 
+        z-index:50; 
+        box-shadow:0 5px 20px rgba(0,0,0,0.6); 
+        position: unset; 
+        width: 100%;
+    } 
+    .header.light-mode {
+        background: #e0e0e0; 
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .logo { 
+        font-weight: 900; 
+        font-size: 24px; 
+        letter-spacing: 2px; 
+        color: var(--logo-text-color); 
+    } 
+    .logo-pink {
+        color: var(--dynamic-primary);
+    }
+    
+    /* Theme Toggle Icon Styling */
+    #theme-toggle {
+        background: var(--cat-btn-bg);
+        color: var(--text-color);
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 16px;
+        transition: all 0.2s;
+        border: 2px solid var(--input-border);
+        cursor: pointer;
+        line-height: 1;
+        outline: none; 
+    }
+    #theme-toggle:hover {
+        border-color: var(--dynamic-primary);
+        color: var(--dynamic-primary);
+    }
+    
+    .search { background: var(--input-bg); border-radius: 50px; padding: 12px 50px 12px 20px; font-size: 14px; width:100%; border:2px solid var(--input-border); color: var(--text-color);} 
+    .search:focus { outline:none; border-color:var(--dynamic-primary); box-shadow:0 0 15px var(--dynamic-primary-shadow); }
+    
+    /* ðŸ’¥ TELEGRAM ICON FIX: Positioning refined for better spacing */
+    .tg-icon { 
+        position: absolute; 
+        top: 50%; 
+        right: 8px; /* Corner par rakha */
+        transform: translateY(-50%); 
+        background:#0088cc; 
+        width:44px; 
+        height:44px; 
+        border-radius:50%; 
+        display:flex; 
+        align-items:center; 
+        justify-content:center; 
+        box-shadow:0 4px 15px rgba(0,136,204,0.8); 
+        z-index:9999; 
+    } 
+    .header .max-w-5xl {
+        position: relative; /* Essential for .tg-icon absolute positioning */
+    }
+    /* Home page adjustment for TG icon, to move it away from theme toggle */
+    #home-page .tg-icon {
+        right: 55px; /* Theme toggle se thoda left shift kiya */
+    }
+
+    /* Movie Card Styling (Unchanged) */
+    .card { 
+        background:var(--card-bg); 
+        border-radius:10px; 
+        overflow:hidden; 
+        border:1px solid var(--input-border); 
+        cursor:pointer; 
+        height:310px; 
+        position:relative; 
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.6); 
+    }
+    .card:hover {
+        transform: translateY(-4px); 
+        box-shadow: 0 0 0 2px var(--dynamic-primary), 0 8px 20px var(--dynamic-primary-shadow); 
+        border-color: transparent;
+    }
+    .thumb { height:220px; width:100%; object-fit:cover; } 
+    .quality { 
+        position:absolute; top:6px; left:6px; 
+        background:linear-gradient(45deg, var(--dynamic-primary), var(--dynamic-primary-gradient-end)); 
+        padding:2px 7px; border-radius:5px; font-size:8px; font-weight:bold; box-shadow:0 1px 3px rgba(0,0,0,0.6); 
+    }
+    .rating-badge {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 2px 7px;
+        border-radius: 5px;
+        font-size: 10px;
+        font-weight: bold;
+        color: white;
+        z-index: 10;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Category Buttons (Unchanged) */
+    .cat-btn { background:var(--cat-btn-bg); padding:7px 14px; border-radius:18px; font-weight:600; margin:3px; transition:all 0.2s; font-size:13px; } 
+    .cat-btn.active, .cat-btn:hover { background:var(--dynamic-primary); transform:translateY(-2px); color:white;}
+
+    /* Pagination Buttons (Unchanged) */
+    .page-btn { background: var(--cat-btn-bg); padding: 5px 9px; border-radius: 4px; font-size: 12px; font-weight: 600; transition: all 0.2s; margin: 0 1px; } 
+    .page-btn.active { background: var(--dynamic-primary); color: white; }
+    
+    /* DETAIL PAGE - Premium Look Changes (Unchanged) */
+    .detail-container { max-width:950px; margin:20px auto; padding:15px; }
+    .detail-poster { width:100%; max-width:202px; border-radius:12px; border:3px solid var(--dynamic-primary); box-shadow:0 8px 20px var(--dynamic-primary-shadow); } 
+    .detail-title { 
+        font-size:28px; 
+        font-weight:900; 
+        text-align:center; 
+        color:var(--dynamic-primary); 
+        margin:15px 0; 
+        text-shadow:0 0 15px var(--dynamic-primary-shadow); 
+    }
+
+    /* Info Grid (Unchanged) */
+    .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; background:var(--bg-color); padding:15px; border-radius:10px; margin-bottom:15px; border: 1px solid var(--input-border);}
+    .info-item { background:var(--input-bg); padding:8px; border-radius:6px; }
+    .info-label { color:var(--dynamic-primary-gradient-end); font-weight:bold; font-size:11px; } 
+    .info-value { color:var(--text-color); font-size:13px; margin-top:1px; }
+
+    /* Synopsis Box (Unchanged) */
+    .synopsis-box { background:var(--bg-color); padding:15px; border-radius:10px; line-height:1.6; margin-bottom:15px; border-left:3px solid var(--dynamic-primary); }
+    .synopsis-box h3 { font-size:17px; margin-bottom:8px; color:var(--dynamic-primary); } 
+    .synopsis-box p { font-size:14px; color:var(--text-color); } 
+
+    /* Video Player & Controls (UPDATED DESIGN for BORDER) */
+    .player-wrapper { 
+        position: relative; 
+        background: #000; 
+        /* Border color is now a dynamic gradient for a more 'color-full' effect */
+        border: 5px solid transparent; 
+        border-image: linear-gradient(45deg, var(--dynamic-primary), var(--dynamic-primary-gradient-end)) 1; 
+        border-radius: 18px; 
+        margin-bottom: 25px; 
+        box-shadow: 0 0 50px var(--dynamic-primary-shadow), 0 10px 30px rgba(0,0,0,0.9); 
+        overflow: hidden; 
+        transition: all 0.3s ease-in-out; 
+    }
+    .player-wrapper:hover {
+        /* Slightly deeper shadow on hover */
+        box-shadow: 0 0 60px var(--dynamic-primary), 0 12px 35px var(--dynamic-primary-shadow);
+        transform: translateY(-2px);
+    }
+    
+    /* Iframe Container (Unchanged - Responsive) */
+    .video-container { 
+        position:relative; 
+        padding-bottom:56.25%; 
+        height:0; 
+        overflow:hidden; 
+    }
+    .video-container iframe { 
+        position:absolute; 
+        top:0; 
+        left:0; 
+        width:100%; 
+        height:100%; 
+        border:none; 
+    }
+    
+    /* Server Tabs (Design Updated - Smaller) */
+    .server-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px; /* Added gap for spacing */
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .server-tab { 
+        background:var(--cat-btn-bg); 
+        padding:6px 10px; /* Reduced padding */
+        border-radius:14px; /* Reduced border radius */
+        font-weight:600; 
+        font-size:11px; /* Reduced font size */
+        transition:all 0.2s; 
+        border: 1px solid var(--input-border);
+    } 
+    .server-tab.active { 
+        background:var(--dynamic-primary); 
+        box-shadow:0 0 8px var(--dynamic-primary-shadow); 
+        color:white; 
+        border-color: var(--dynamic-primary);
+    }
+
+    /* Download Buttons (Design Updated - Grid and smaller) */
+    #download-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Display in 2 columns (or more) */
+        gap: 10px; /* Gap between buttons */
+        margin-top: 15px;
+    }
+    .download-btn { 
+        display:block; 
+        background:linear-gradient(to right,var(--dynamic-primary),var(--dynamic-primary-gradient-end)); 
+        color:white; 
+        padding:8px; /* Reduced padding */
+        margin:0; /* Removed margin to use grid gap */
+        border-radius:4px; /* Reduced border radius */
+        text-align:center; 
+        font-weight:bold; 
+        font-size:12px; /* Reduced font size */
+        text-decoration:none; 
+        box-shadow:0 3px 8px var(--dynamic-primary-shadow); 
+        transition:all 0.3s; 
+    }
+    .download-btn:hover { 
+        transform:translateY(-1px); 
+        box-shadow:0 5px 12px var(--dynamic-primary-shadow); 
+    }
+
+    /* Back Button (Small) */
+    .back-btn { background:#333; padding:5px 12px; border-radius:18px; display:inline-block; font-weight:bold; font-size:12px; transition:all 0.2s; }
+    .back-btn:hover { background:var(--dynamic-primary); }
+    
+    /* Loader Style (Unchanged) */
+    .spinner { border-left-color: var(--dynamic-primary); }
+
+    /* Empty State Styles (Unchanged) */
+    .empty-state {
+        text-align: center;
+        padding: 50px 20px;
+        margin-top: 20px;
+        border: 2px dashed var(--input-border);
+        border-radius: 10px;
+        color: var(--text-color);
+    }
+    .empty-state h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--dynamic-primary);
+    }
+    .empty-state p {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+    .request-btn {
+        background: #0088cc;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: background 0.2s;
+    }
+    .request-btn:hover {
+        background: #006b9b;
+    }
+
+    /* NEW: Social Share Section Styling */
+    .share-container {
+        padding: 15px;
+        border-top: 1px solid var(--input-border);
+        margin-top: 20px;
+        text-align: center;
+    }
+    .share-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        margin: 0 5px;
+        color: white;
+        font-size: 16px;
+        transition: transform 0.2s;
+    }
+    .share-btn:hover {
+        transform: scale(1.1);
+    }
+    /* Specific Colors */
+    .share-whatsapp { background-color: #25D366; }
+    .share-telegram { background-color: #0088cc; }
+    .share-twitter { background-color: #1DA1F2; }
+    .share-facebook { background-color: #1877F2; }
+    
+    /* JS BLOCK OVERLAY CSS */
+    #js-block-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #222;
+        color: white;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    #js-block-overlay h2 {
+        color: var(--dynamic-primary); 
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    
+    @media (max-width:576px) {
+      .card { height:260px; }
+      .thumb { height:190px; }
+      .detail-title { font-size:22px; }
+      .detail-poster { max-width:160px; }
+      .info-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<noscript>
+  <div id="js-block-overlay">
+    <div>
+      <i class="fas fa-exclamation-triangle text-yellow-500 text-5xl mb-4"></i>
+      <h2>JavaScript Required!</h2>
+      <p class="text-lg">VegaHub.pro देखने, स्ट्रीम करने और डाउनलोड करने के लिए JavaScript आवश्यक है।</p>
+      <p class="mt-4">कृपया अपने ब्राउज़र सेटिंग्स में JavaScript को सक्षम (Enable) करें।</p>
+    </div>
+  </div>
+</noscript>
+<div id="home-page">
+  <header class="header">
+    <div class="max-w-5xl mx-auto px-4 flex justify-between items-center">
+      <h1 class="logo">Vega<span class="logo-pink">Hub</span>.pro</h1>
+      
+      <button id="theme-toggle" class="transition" title="Toggle Light/Dark Mode"><i class="fas fa-sun"></i></button>
+      
+      <a href="https://t.me/vegahubb" target="_blank" class="tg-icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6">
+      </a>
+    </div>
+  </header>
+
+  <div>
+    <div class="max-w-4xl mx-auto px-4 mt-6">
+      <div class="relative">
+        <input type="text" id="search" placeholder="Search Movie Name..." class="search">
+        <i class="fas fa-search absolute right-5 top-3 text-pink-500 text-base"></i>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 mt-6 flex flex-wrap justify-center gap-2">
+      <button class="cat-btn active" data-cat="all">All</button>
+      <button class="cat-btn" data-cat="bollywood">Bollywood</button>
+      <button class="cat-btn" data-cat="hollywood">Hollywood</button>
+      <button class="cat-btn" data-cat="south">South</button>
+      <button class="cat-btn" data-cat="web">Web Series</button>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 py-6">
+      <div id="grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-4"></div>
+      <div id="empty-search-state" class="empty-state hidden">
+          <i class="fas fa-search-minus text-4xl mb-4 text-gray-400"></i>
+          <h3>Movie Not Found!</h3>
+          <p>The movie you searched for is not yet available in our database.</p>
+          <a href="https://t.me/vegahubpro" target="_blank" class="request-btn">
+              <i class="fab fa-telegram-plane mr-2"></i> Request Movie on Telegram
+          </a>
+      </div>
+      <div id="loading-state" class="empty-state">
+          <i class="fas fa-spinner fa-spin text-4xl mb-4 text-pink-500"></i>
+          <h3>Loading Movies...</h3>
+          <p>Fetching the latest data from the server.</p>
+      </div>
+      <div class="flex justify-center gap-1 mt-8 flex-wrap" id="pagination"></div>
+    </div>
+  </div>
+</div>
+
+<div id="detail-page" class="hidden">
+  <header class="header">
+    <div class="max-w-5xl mx-auto px-4 flex justify-between items-center" style="position:relative;">
+      <h1 class="logo">Vega<span class="logo-pink">Hub</span>.pro</h1>
+      <button onclick="showHome()" class="back-btn ml-auto mr-16">&larr; Home</button> 
+      
+      <a href="https://t.me/vegahubb" target="_blank" class="tg-icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6">
+      </a>
+    </div>
+  </header>
+  <div> 
+    <div class="detail-container">
+      <h1 id="detail-title" class="detail-title">Loading...</h1>
+      
+      <center>
+        <img id="detail-poster" class="detail-poster" src="" alt="Poster">
+      </center>
+
+      <div id="loader" class="spinner"></div> 
+      
+      <div id="text-details-container" class="hidden">
+          <h2 style="text-align:center; color:var(--text-color); font-size:18px; font-weight:600; margin:10px 0 20px;">Movie Details</h2>
+          
+          <div class="info-grid">
+              <div class="info-item"><div class="info-label">Rating (IMDb)</div><div id="detail-rating" class="info-value">...</div></div>
+              <div class="info-item"><div class="info-label">Runtime</div><div id="detail-runtime" class="info-value">...</div></div>
+              <div class="info-item"><div class="info-label">Audio/Language</div><div id="detail-language" class="info-value">...</div></div>
+              <div class="info-item"><div class="info-label">Genre</div><div id="detail-genres" class="info-value">...</div></div>
+              <div class="info-item"><div class="info-label">Year</div><div id="detail-year" class="info-value">...</div></div>
+              <div class="info-item"><div class="info-label">Quality</div><div id="detail-quality" class="info-value">...</div></div>
+          </div>
+          
+          <div class="synopsis-box" style="border-left: 3px solid var(--dynamic-primary-gradient-end);">
+              <h3 style="color:var(--dynamic-primary-gradient-end);">Cast</h3>
+              <p id="detail-cast" class="text-sm text-gray-300">...</p>
+          </div>
+
+          <div class="synopsis-box">
+              <h3 style="color:var(--dynamic-primary);">Storyline (Synopsis)</h3>
+              <p id="detail-synopsis" style="color:var(--text-color);">...</p>
+          </div>
+      </div>
+      
+      <div id="share-section" class="share-container">
+          <h3 style="font-size:16px; font-weight:600; margin-bottom:10px; color:var(--dynamic-primary-gradient-end);">Share This Movie</h3>
+          <div id="share-buttons">
+              </div>
+      </div>
+      <div id="content-area">
+          <h3 style="text-align:center; color:var(--dynamic-primary); font-size:20px; margin:20px 0 10px;">Watch Online</h3> 
+          <div class="server-tabs" id="server-tabs"></div>
+          
+          <div id="content-unavailable" class="empty-state hidden">
+              <i class="fas fa-calendar-alt text-4xl mb-4 text-orange-400"></i>
+              <h3>Watch/Download Link is Coming Soon!</h3>
+              <p>We are currently uploading this content. Please check back later or join our Telegram for instant updates.</p>
+              <a href="https://t.me/vegahubpro" target="_blank" class="request-btn">
+                  <i class="fab fa-telegram-plane mr-2"></i> Join Telegram Channel
+              </a>
+          </div>
+          
+          <div id="player-wrapper">
+              <div class="video-container">
+                  <iframe id="movie-iframe" src="about:blank" allowfullscreen></iframe>
+              </div>
+          </div>
+          <h3 style="text-align:center; color:var(--dynamic-primary); font-size:20px; margin:30px 0 15px;">Download Links</h3> 
+          <div id="download-buttons"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const MONETAG = "https://otieu.com/4/10245869";
+const OMDB_API_KEY = "a4ff55fe"; 
+const OMDB_BASE_URL = "https://www.omdbapi.com/";
+const DATA_FILE_URL = 'data/movies.json'; 
+const YOUTUBE_API_KEY = "AIzaSyDT1RLcB16NDKXhkJrAPG2aeQfb464IGTA"; 
+const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
+
+// ðŸš€ Global State for Monetag Redirect Logic (SESSION FLAG)
+const MONETAG_SESSION_FLAG = 'monetag_seen_session'; // sessionStorage key
+const MONETAG_AD_REDIRECT_URL = MONETAG; 
+
+// ðŸš€ Category Color Mapping (No Change)
+const categoryColors = {
+  'all': { primary: '#ff1493', secondary: '#ff4500', shadow: 'rgba(255, 20, 147, 0.4)' }, 
+  'bollywood': { primary: '#ff9800', secondary: '#ffa07a', shadow: 'rgba(255, 152, 0, 0.6)' }, 
+  'hollywood': { primary: '#00bfff', secondary: '#1e90ff', shadow: 'rgba(0, 191, 255, 0.6)' }, 
+  'south': { primary: '#32cd32', secondary: '#008000', shadow: 'rgba(50, 205, 50, 0.6)' }, 
+  'web': { primary: '#8a2be2', secondary: '#9932cc', shadow: 'rgba(138, 43, 226, 0.6)' } 
+};
+
+// ðŸŽ¬ Movies Data (Will be filled by fetchMoviesData)
+let movies = []; 
+
+let filtered = []; 
+let page = 1;
+const perPage = 21;
+let currentMovie = null;
+
+// ðŸ”‘ NEW: Function to fetch JSON data from the server
+async function fetchMoviesData() {
+    document.getElementById('loading-state').classList.remove('hidden');
+    try {
+        const response = await fetch(DATA_FILE_URL);
+        if (!response.ok) {
+            console.error(`Failed to fetch data. Status: ${response.status}. Trying to access: ${new URL(DATA_FILE_URL, window.location.href).href}`);
+            throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        
+        movies = data; 
+        filtered = [...movies]; 
+        
+        if (window.location.hash.startsWith('#movie=')) {
+            const imdbId = window.location.hash.substring(7);
+            const movieToLoad = findMovieById(imdbId);
+            if (movieToLoad) {
+                showDetail(movieToLoad, true); 
+                history.replaceState({ page: 'detail', movieId: imdbId }, movieToLoad.title, window.location.hash);
+            } else {
+                render();
+            }
+        } else {
+            render(); 
+        }
+
+    } catch (error) {
+        console.error("Critical Error loading movie data:", error);
+        const grid = document.getElementById('grid');
+        grid.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle text-4xl mb-4 text-red-500"></i><h3>Data Error</h3><p>Could not load movie data file. Check your data/movies.json file path and format.</p></div>';
+    } finally {
+        document.getElementById('loading-state').classList.add('hidden');
+    }
+}
+
+// ðŸ”‘ NEW: Movie ID se object dhoondhne ka function
+function findMovieById(imdbId) {
+    return movies.find(m => m.imdb_id === imdbId);
+}
+
+// ------------------- Utility Functions ---------------------
+
+function requestNotificationPermission() {
+    if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+            }
+        });
+    }
+}
+
+function toggleTheme() {
+    const body = document.body;
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    body.classList.toggle('light-mode');
+    document.querySelector('.header').classList.toggle('light-mode');
+    
+    const isLightMode = body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+    
+    if (isLightMode) {
+        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>'; 
+    } else {
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>'; 
+    }
+}
+
+function setCategoryTheme(cat) {
+    const theme = categoryColors[cat] || categoryColors['all'];
+    document.documentElement.style.setProperty('--dynamic-primary', theme.primary);
+    document.documentElement.style.setProperty('--dynamic-primary-gradient-end', theme.secondary);
+    document.documentElement.style.setProperty('--dynamic-primary-shadow', theme.shadow);
+}
+
+// ðŸ”‘ FIX: showHome function ko History API ke saath update kiya गया
+function showHome() {
+    document.getElementById('detail-page').classList.add('hidden');
+    document.getElementById('home-page').classList.remove('hidden');
+    window.scrollTo(0,0);
+    
+    document.getElementById('search').value = '';
+    document.getElementById('empty-search-state').classList.add('hidden');
+    document.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('active'));
+    document.querySelector('.cat-btn[data-cat="all"]').classList.add('active');
+    setCategoryTheme('all'); 
+    filtered = [...movies];
+    page = 1;
+    render();
+    
+    if (window.location.hash) {
+        history.replaceState({ page: 'home' }, 'VegaHub Home', window.location.pathname + window.location.search);
+    }
+}
+
+
+async function fetchOMDbDetails(imdbId) {
+    if (!imdbId) return null;
+    const detailURL = `${OMDB_BASE_URL}?i=${imdbId}&plot=full&apikey=${OMDB_API_KEY}`;
+    try {
+        const response = await fetch(detailURL);
+        if (!response.ok) throw new Error(`HTTP Status ${response.status}`);
+        const data = await response.json();
+        if (data.Response === "False") {
+            console.error("OMDb API Error:", data.Error);
+            return null;
+        }
+        return data;
+    } catch (error) {
+        console.error("Critical OMDb Fetch Error:", error);
+        return null;
+    }
+}
+
+async function fetchYouTubeTrailer(query) {
+    if (!YOUTUBE_API_KEY) {
+        console.warn("YouTube API Key is missing.");
+        return null;
+    }
+
+    const fullQuery = `${query} Official Trailer`;
+
+    const searchUrl = `${YOUTUBE_SEARCH_URL}?key=${YOUTUBE_API_KEY}&part=snippet&q=${encodeURIComponent(fullQuery)}&type=video&maxResults=1`;
+    
+    try {
+        const response = await fetch(searchUrl);
+        if (!response.ok) {
+            console.error(`YouTube API HTTP Error: ${response.status}`);
+            return null;
+        }
+        const data = await response.json();
+
+        if (data.items && data.items.length > 0 && data.items[0].id.videoId) {
+            return data.items[0].id.videoId;
+        }
+        return null; 
+    } catch (error) {
+        console.error("YouTube Fetch Error:", error);
+        return null;
+    }
+}
+
+function renderShareButtons(movieTitle, shareUrl) {
+    const shareContainer = document.getElementById('share-buttons');
+    shareContainer.innerHTML = ''; 
+
+    const encodedUrl = encodeURIComponent(shareUrl);
+    const encodedTitle = encodeURIComponent(`Watch ${movieTitle} in HD on VegaHub! - ${shareUrl}`);
+    const encodedText = encodeURIComponent(`Watch ${movieTitle} in HD!`);
+
+
+    const shareLinks = [
+        { 
+            name: "WhatsApp", 
+            icon: "fab fa-whatsapp", 
+            class: "share-whatsapp", 
+            url: `https://api.whatsapp.com/send?text=${encodedTitle}` 
+        },
+        { 
+            name: "Telegram", 
+            icon: "fab fa-telegram-plane", 
+            class: "share-telegram", 
+            url: `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}` 
+        },
+        { 
+            name: "Twitter", 
+            icon: "fab fa-x-twitter", 
+            class: "share-twitter", 
+            url: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}` 
+        },
+        { 
+            name: "Facebook", 
+            icon: "fab fa-facebook-f", 
+            class: "share-facebook", 
+            url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}` 
+        }
+    ];
+
+    shareLinks.forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.url;
+        a.className = `share-btn ${item.class}`;
+        a.target = "_blank";
+        a.title = `Share on ${item.name}`;
+        a.innerHTML = `<i class="${item.icon}"></i>`;
+        shareContainer.appendChild(a);
+    });
+}
+
+
+// ------------------- ðŸŒŸ showDetail FUNCTION ---------------------
+
+async function showDetail(movie, isPopstate = false) {
+  currentMovie = movie;
+  document.getElementById('home-page').classList.add('hidden');
+  document.getElementById('detail-page').classList.remove('hidden');
+  window.scrollTo(0,0);
+  
+  if (!isPopstate) {
+      history.pushState({ page: 'detail', movieId: movie.imdb_id }, movie.title, `#movie=${movie.imdb_id}`);
+  }
+  
+  setCategoryTheme(movie.cat); 
+  
+  const detailPoster = document.getElementById('detail-poster');
+  document.getElementById('loader').classList.remove('hidden');
+  document.getElementById('text-details-container').classList.add('hidden');
+  document.getElementById('content-area').classList.remove('hidden'); 
+  
+  document.getElementById('content-unavailable').classList.add('hidden');
+  document.getElementById('player-wrapper').classList.remove('hidden');
+  
+  
+  document.getElementById('detail-title').textContent = movie.title + ' (Loading Details...)';
+  document.getElementById('detail-quality').textContent = movie.quality;
+  
+  const initialPosterSrc = movie.thumb_poster || (movie.thumb && movie.thumb !== '' ? movie.thumb : 'https://via.placeholder.com/202x300/111/fff?text=Fetching...');
+  detailPoster.src = initialPosterSrc;
+
+  // --- OMDb Fetching (API calls are asynchronous and take time) ---
+  document.getElementById('detail-rating').textContent = '...';
+  document.getElementById('detail-year').textContent = '...';
+  
+  let omdbDetails = null;
+  if (movie.imdb_id) {
+      omdbDetails = await fetchOMDbDetails(movie.imdb_id);
+  }
+  
+  let finalMovieTitle = movie.title;
+
+  if (omdbDetails) {
+      finalMovieTitle = omdbDetails.Title;
+      document.getElementById('detail-title').textContent = omdbDetails.Title + (omdbDetails.Year ? " (" + omdbDetails.Year + ")" : "");
+      
+      const isPlaceholder = detailPoster.src.includes('placeholder.com');
+      
+      if (isPlaceholder || !movie.thumb || movie.thumb === '') {
+          if (omdbDetails.Poster && omdbDetails.Poster !== 'N/A') {
+              detailPoster.src = omdbDetails.Poster;
+          } else {
+              detailPoster.src = 'https://via.placeholder.com/202x300/111/fff?text=Poster+N/A';
+          }
+      }
+
+      document.getElementById('detail-rating').textContent = omdbDetails.imdbRating && omdbDetails.imdbRating !== 'N/A' ? `${omdbDetails.imdbRating}/10` : 'N/A';
+      document.getElementById('detail-year').textContent = omdbDetails.Year || 'N/A';
+      document.getElementById('detail-runtime').textContent = omdbDetails.Runtime || 'N/A';
+      document.getElementById('detail-genres').textContent = omdbDetails.Genre || 'N/A';
+      document.getElementById('detail-language').textContent = omdbDetails.Language || 'N/A'; 
+      document.getElementById('detail-synopsis').textContent = omdbDetails.Plot || 'Storyline not available.';
+      document.getElementById('detail-cast').textContent = omdbDetails.Actors || 'N/A';
+  } else {
+      detailPoster.src = 'https://via.placeholder.com/202x300/111/fff?text=Details+N/A';
+      
+      document.getElementById('detail-title').textContent = movie.title + " (Details N/A)";
+      document.getElementById('detail-rating').textContent = 'N/A';
+      document.getElementById('detail-year').textContent = movie.year || 'N/A'; 
+      document.getElementById('detail-runtime').textContent = 'N/A';
+      document.getElementById('detail-genres').textContent = 'N/A';
+      document.getElementById('detail-language').textContent = 'N/A';
+      document.getElementById('detail-synopsis').textContent = 'Could not fetch storyline from OMDb.';
+      document.getElementById('detail-cast').textContent = 'N/A';
+  }
+
+  document.getElementById('loader').classList.add('hidden');
+  document.getElementById('text-details-container').classList.remove('hidden');
+
+  
+  // --- Share Button Rendering ---
+  const currentShareUrl = window.location.origin + window.location.pathname + `#movie=${movie.imdb_id}`;
+  renderShareButtons(finalMovieTitle, currentShareUrl);
+
+  
+  // --- Trailer Fetch and Integration (Unchanged) ---
+  
+  const movieTitle = omdbDetails ? omdbDetails.Title : movie.title;
+  const movieYear = omdbDetails ? omdbDetails.Year : movie.year;
+  
+  const videoId = await fetchYouTubeTrailer(`${movieTitle} ${movieYear}`);
+  
+  const serversWithTrailer = [];
+  if (videoId) {
+      const trailerLink = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`;
+      serversWithTrailer.push({ name: "Official Trailer", link: trailerLink, type: 'trailer' }); // type added
+  }
+
+  if (movie.servers && movie.servers.length > 0) {
+      serversWithTrailer.push(...movie.servers.map(s => ({...s, type: 'watch'}))); // type added
+  }
+
+  // --- Content Check and Rendering (Updates for Download Buttons) ---
+  const hasServers = serversWithTrailer.length > 0;
+  const hasDownloads = movie.downloads && Object.keys(movie.downloads).some(key => movie.downloads[key].link && movie.downloads[key].link !== '#');
+
+  const tabs = document.getElementById('server-tabs');
+  const iframe = document.getElementById('movie-iframe');
+  const dl = document.getElementById('download-buttons');
+  
+  tabs.innerHTML = '';
+  dl.innerHTML = '';
+
+  if (!hasServers && !hasDownloads) {
+      document.getElementById('content-unavailable').classList.remove('hidden');
+      document.getElementById('player-wrapper').classList.add('hidden'); 
+      tabs.innerHTML = '<div style="color:var(--text-color); text-align:center; font-style:italic;">No servers available yet.</div>';
+      dl.innerHTML = '<div style="color:var(--text-color); text-align:center; font-style:italic;">Download links are coming soon.</div>';
+  } else {
+      document.getElementById('content-unavailable').classList.add('hidden');
+      document.getElementById('player-wrapper').classList.remove('hidden');
+      
+      // --- Server Tabs Logic (Using serversWithTrailer) ---
+      let activeLink = 'about:blank';
+      if (hasServers) {
+          serversWithTrailer.forEach((server, index) => {
+              const btn = document.createElement('div');
+              const isActive = (index === 0);
+              
+              btn.className = 'server-tab' + (isActive ? ' active':'');
+              btn.textContent = server.name;
+
+              // NEW: Data attribute for Monetag flow
+              btn.setAttribute('data-target-url', server.link);
+              btn.setAttribute('data-target-type', server.type || 'watch');
+
+              // CRITICAL FIX: Ad flow सिर्फ़ Watch server पर लगाएं
+              if ((server.type || 'watch') === 'watch') {
+                   // Watch server buttons पर Monetag handler लगाएं
+                   btn.addEventListener('click', handleFirstClickMonetag); 
+              } else {
+                   // Trailer पर सीधा iframe load करें
+                   btn.onclick = () => {
+                       document.querySelectorAll('.server-tab').forEach(t => t.classList.remove('active'));
+                       btn.classList.add('active');
+                       iframe.src = server.link;
+                   };
+              }
+              tabs.appendChild(btn);
+
+              if (isActive) {
+                  activeLink = server.link;
+              }
+          });
+          
+          iframe.src = activeLink;
+          
+          const defaultActiveServer = serversWithTrailer.find(s => s.link === activeLink);
+          if (defaultActiveServer && defaultActiveServer.type !== 'trailer') {
+              iframe.src = defaultActiveServer.link;
+          }
+
+      } else {
+          tabs.innerHTML = '<div style="color:var(--text-color); text-align:center; font-style:italic;">No watch servers available yet.</div>';
+          iframe.src = 'about:blank';
+      }
+
+      // --- Download Buttons (UPDATED Logic for Monetag Integration) ---
+      if (hasDownloads) {
+          Object.keys(movie.downloads).forEach(qKey => {
+              const downloadData = movie.downloads[qKey];
+              const link = downloadData.link;
+              const labelText = downloadData.label; 
+
+              if(link && link !== "#") {
+                  const a = document.createElement('a');
+                  a.href = link;
+                  a.className = 'download-btn monetag-trigger'; // ADDED CLASS for listener
+                  a.textContent = labelText; 
+                  // NEW: Store the final destination URL
+                  a.setAttribute('data-target-url', link); 
+                  a.setAttribute('data-target-type', 'download'); // Type added
+                  dl.appendChild(a);
+              }
+          });
+          // New: Attach listener to the dynamically created buttons after rendering
+          attachMonetagTrigger();
+          
+      } else {
+          dl.innerHTML = '<div style="color:var(--text-color); text-align:center; font-style:italic;">Download links are coming soon.</div>';
+      }
+  }
+}
+
+// -----------------------------------------------------------------------
+// ðŸ”‘ CORE FUNCTION: Per-Session First-Click Monetag Logic
+// -----------------------------------------------------------------------
+
+function handleFirstClickMonetag(event) {
+    event.preventDefault(); 
+    
+    const element = event.currentTarget; 
+    const targetUrl = element.getAttribute('data-target-url');
+    
+    if (!targetUrl) return;
+
+    // CHECK: sessionStorage में Flag देखें
+    const monetagSeen = sessionStorage.getItem(MONETAG_SESSION_FLAG);
+
+    if (!monetagSeen) {
+        // --- 1. FIRST CLICK (Session): Show Ad ---
+        
+        // SET: Ad देखने के बाद, Flag को sessionStorage में सेट करें
+        sessionStorage.setItem(MONETAG_SESSION_FLAG, 'true');
+        
+        // Fake History Entry push करें
+        history.pushState({ page: 'ad-redirect', type: 'monetag-interstitial', initialPage: window.location.href }, 'Ad Gateway', window.location.href);
+        
+        // user को Monetag ad URL पर redirect करें
+        window.location.href = MONETAG_AD_REDIRECT_URL; 
+        
+    } else {
+        // --- 2. SUBSEQUENT CLICK (Same Session): Go to Actual Target ---
+        
+        const targetType = element.getAttribute('data-target-type');
+        
+        if (targetType === 'download') {
+             // Download links के लिए नया टैब खोलें
+             window.open(targetUrl, '_blank');
+        } else if (targetType && targetType.startsWith('watch')) {
+            // Watch links के लिए iframe में लोड करें
+            const iframe = document.getElementById('movie-iframe');
+            if (iframe) {
+                 iframe.src = targetUrl;
+                 // UI अपडेट: Active tab सेट करें
+                 document.querySelectorAll('.server-tab').forEach(t => t.classList.remove('active'));
+                 element.classList.add('active');
+            }
+        }
+    }
+}
+
+
+function attachMonetagTrigger() {
+    // Select all download buttons created above
+    const buttons = document.querySelectorAll('.download-btn.monetag-trigger');
+
+    buttons.forEach(button => {
+        if (button.hasAttribute('data-listener-attached')) return;
+        
+        // Session First-Click Handler लगाएं
+        button.addEventListener('click', handleFirstClickMonetag); 
+        button.setAttribute('data-listener-attached', 'true');
+    });
+}
+
+
+// ------------------- General Functions ---------------------
+
+async function render() {
+  const g = document.getElementById('grid');
+  g.innerHTML = '';
+  document.getElementById('empty-search-state').classList.add('hidden'); 
+  
+  const start = (page-1)*perPage;
+  const end = Math.min(start + perPage, filtered.length);
+
+  if (filtered.length === 0 && movies.length > 0) {
+      document.getElementById('empty-search-state').classList.remove('hidden');
+      renderPagination(0); 
+      return;
+  }
+  if (movies.length === 0) return; 
+
+  for(let i=start; i<end; i++) {
+    const m = filtered[i];
+    const d = document.createElement('div');
+    d.className = 'card';
+    
+    let cardThumbSrc = m.thumb_poster || (m.thumb && m.thumb !== '' ? m.thumb : '');
+    
+    // OMDb fetch logic...
+    if ((!m.thumb || m.thumb === 'https://thisisabrokenlink.com/404.jpg') && m.imdb_id && !m.thumb_poster) {
+        const omdbDetails = await fetchOMDbDetails(m.imdb_id);
+        if (omdbDetails && omdbDetails.Poster && omdbDetails.Poster !== 'N/A') {
+            m.thumb_poster = omdbDetails.Poster; 
+            cardThumbSrc = omdbDetails.Poster;
+        } else {
+            m.thumb_poster = 'https://via.placeholder.com/300x420/111/fff?text=No+Poster';
+            cardThumbSrc = m.thumb_poster;
+        }
+        if (omdbDetails && omdbDetails.imdbRating && omdbDetails.imdbRating !== 'N/A') {
+            m.imdb_rating = omdbDetails.imdbRating;
+        } else {
+            m.imdb_rating = null;
+        }
+    } else if (!cardThumbSrc || cardThumbSrc === 'https://thisisabrokenlink.com/404.jpg') {
+        cardThumbSrc = 'https://via.placeholder.com/300x420/111/fff?text=Poster+Missing';
+    }
+
+
+    const movieYear = m.year ? `(${m.year})` : '';
+
+    d.innerHTML = `
+      <img src="${cardThumbSrc}" class="thumb" onerror="this.src='https://via.placeholder.com/300x420/111/fff?text=${encodeURIComponent(m.title)}+Broken'" data-loaded-src="${cardThumbSrc}">
+      <div class="quality">${m.quality}</div>
+      ${m.imdb_rating ? `<div class="rating-badge"><i class="fas fa-star text-yellow-400"></i> ${m.imdb_rating}</div>` : ''}
+      <div class="p-2 text-center"> 
+          <div class="text-pink-400 font-extrabold text-xs leading-tight">${m.title}</div> 
+          <div class="text-orange-400 text-[10px] mt-1">${movieYear}</div> 
+      </div>
+    `;
+    d.onclick = () => showDetail(m); // Normal click will push state
+    g.appendChild(d);
+  }
+  renderPagination(filtered.length);
+}
+
+function renderPagination(totalItems = filtered.length) { 
+  const total = Math.ceil(totalItems / perPage);
+  const p = document.getElementById('pagination');
+  p.innerHTML = '';
+  
+  if(total <= 1) return; 
+
+  if(page > 1) p.innerHTML += `<button class="page-btn" onclick="page--;render()">Previous</button>`;
+  for(let i=1; i<=total; i++){
+    if(i===1 || i===total || Math.abs(i-page)<=2){
+      p.innerHTML += `<button class="page-btn ${i===page?'active':''}" onclick="page=${i};render()">${i}</button>`;
+    } else if(Math.abs(i-page)===3) p.innerHTML += `<span class="px-1 text-gray-400 text-sm">...</span>`;
+  }
+  if(page < total) p.innerHTML += `<button class="page-btn" onclick="page++;render()">Next</button>`;
+}
+
+document.querySelectorAll('.cat-btn').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  const c = b.dataset.cat;
+  
+  setCategoryTheme(c); 
+  
+  filtered = c === 'all' ? [...movies] : movies.filter(x => x.cat === c);
+  page = 1; render();
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  filtered = movies.filter(m => m.title.toLowerCase().includes(e.target.value.toLowerCase()));
+  page = 1; render();
+});
+
+// ------------------- INITIALIZATION & HISTORY HANDLERS ---------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchMoviesData(); 
+    requestNotificationPermission();
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const header = document.querySelector('.header');
+    
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        header.classList.add('light-mode'); 
+        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+    } else {
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    document.getElementById('theme-toggle').onclick = toggleTheme;
+    
+    setCategoryTheme('all');
+    
+    // ðŸ”‘ CRITICAL FIX: Back button (browser/mobile) press ko handle karne ke liye
+    window.addEventListener('popstate', (event) => {
+        
+        // --- Handle Ad Redirection Back Click ---
+        if (event.state && event.state.page === 'ad-redirect') {
+            // Monetag Ad से वापस आने पर, user को पिछली Detail/Home state पर ही रहने दें।
+            console.log("Returned from Monetag Ad. User must click again for actual content.");
+        }
+        // --- END Ad Redirection Handler ---
+
+
+        // Existing Logic (Detail/Home navigation)
+        if (!window.location.hash || (event.state && event.state.page === 'home')) {
+            showHome();
+        } else if (event.state && event.state.page === 'detail') {
+            const movieToLoad = findMovieById(event.state.movieId);
+            if (movieToLoad) {
+                showDetail(movieToLoad, true); 
+            } else {
+                showHome();
+            }
+        } else {
+            showHome();
+        }
+    });
+
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// VID SRC HD — DIRECT PLAYER 
+// ═══════════════════════════════════════════════════════════════════
+
+const vidsrcDirectMirrors = [
+  'https://vidsrc-embed.ru',
+  'https://vidsrc-embed.su',
+  'https://vidsrcme.su',
+  'https://vsrc.su', 
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const originalShowDetail = window.showDetail;
+
+  window.showDetail = async function(movie, isPopstate = false) {
+    // 1. Original showDetail logic चलाओ 
+    if (typeof originalShowDetail === 'function') {
+        await originalShowDetail(movie, isPopstate);
+    } 
+    
+
+    if (!movie.imdb_id) return;
+
+    const tabs = document.getElementById('server-tabs');
+    // Guard clause to prevent duplicating the button
+    if (!tabs || tabs.querySelector('.vidsrc-direct-btn')) {
+        return; 
+    }
+
+    const btn = document.createElement('div');
+    btn.className = 'server-tab vidsrc-direct-btn active';
+    btn.innerHTML = 'WATCH FULL MOVIE <span style="color:yellow;font-size:9px">HD DIRECT</span>';
+    btn.style.cssText = 'background: linear-gradient(135deg, #00ff9d, #00c853) !important; font-weight: 700; padding: 8px 12px; margin: 4px; border-radius: 6px; cursor: pointer;';
+
+    const imdbId = movie.imdb_id.startsWith('tt') ? movie.imdb_id : 'tt' + movie.imdb_id;
+    const isTV = movie.cat === 'web' || movie.type === 'tv';
+    
+    const randomIndex = Math.floor(Math.random() * vidsrcDirectMirrors.length);
+    const randomBase = vidsrcDirectMirrors[randomIndex];
+    
+    let directLink;
+
+    if (isTV) {
+        directLink = `${randomBase}/embed/tv/${imdbId}/1/1`;
+    } else {
+        directLink = `${randomBase}/embed/movie/${imdbId}`;
+    }
+    
+    // Vidsrc पर भी Monetag First-Click Logic लागू करें
+    btn.setAttribute('data-target-url', directLink);
+    btn.setAttribute('data-target-type', 'download'); // Treat as download/external link for window.open
+    
+    // Global First-Click Handler लगाएं
+    btn.addEventListener('click', handleFirstClickMonetag);
+
+
+    // Button को tabs में जोड़ो
+    tabs.appendChild(btn);
+
+    // Agar movie mein koi server nahi hai → auto open kar do
+    if (!movie.servers || movie.servers.length === 0) {
+      setTimeout(() => {
+          // sessionStorage से चेक करें
+          if (!sessionStorage.getItem(MONETAG_SESSION_FLAG)) {
+               // Ad नहीं देखा गया है, तो Ad flow शुरू करो
+               btn.click(); 
+          } else {
+               // Ad देखा जा चुका है, तो Vidsrc link सीधे खोल दो
+               window.open(directLink, '_blank');
+          }
+      }, 1200);
+    }
+  };
+});
+
+
+</script>
+
+</body>
+</html>
