@@ -20,26 +20,6 @@
     }
   },
   {
-    "title": "Tere ishq mein",
-    "imdb_id": "tt28142095",
-    "thumb": "",
-    "cat": "bollywood",
-    "quality": "HDTC",
-    "year": "2025",
-    "servers": [
-      {
-        "name": "SERVER2",
-        "link": "HH"
-      }
-    ],
-    "downloads": {
-      "q1": {
-        "label": "10803gb",
-        "link": "hhh"
-      }
-    }
-  },
-  {
     "title": "Titanic",
     "imdb_id": "tt0120338",
     "thumb": "",
@@ -69,13 +49,13 @@
     "servers": [
       {
         "name": "b1 ",
-        "link": "hh"
+        "link": "https://primeflicks.site"
       }
     ],
     "downloads": {
       "q1": {
         "label": "720 - 4.5Gb done",
-        "link": "https://fast-dl.lol/dl/ea7d56"
+        "link": "hhhh"
       }
     }
   }
