@@ -1,5 +1,25 @@
 [
   {
+    "title": "Tere ishq mein",
+    "imdb_id": "tt28142095",
+    "thumb": "",
+    "cat": "bollywood",
+    "quality": "HDTC",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "SERVER2",
+        "link": "HH"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "10803gb",
+        "link": "hhh"
+      }
+    }
+  },
+  {
     "title": "Tere ishq main",
     "imdb_id": "tt28142095",
     "thumb": "",
