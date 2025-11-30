@@ -20,6 +20,26 @@
     }
   },
   {
+    "title": "Tere ishq main",
+    "imdb_id": "tt28142095",
+    "thumb": "",
+    "cat": "bollywood",
+    "quality": "HDTC",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "Server1",
+        "link": "https://mxdrop.to/e/wlw08eppc3wqrk"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "1080 1.5GB",
+        "link": "https://mxdrop.to/f/wlw08eppc3wqrk"
+      }
+    }
+  },
+  {
     "title": "Stranger Things Season5",
     "imdb_id": "tt4574334",
     "thumb": "",
