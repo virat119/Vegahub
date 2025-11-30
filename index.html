@@ -389,7 +389,7 @@
       
       <button id="theme-toggle" class="transition" title="Toggle Light/Dark Mode"><i class="fas fa-sun"></i></button>
       
-      <a href="https://t.me/vegahubpro" target="_blank" class="tg-icon">
+      <a href="https://t.me/vegahubb" target="_blank" class="tg-icon">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6">
       </a>
     </div>
@@ -437,7 +437,7 @@
       <h1 class="logo">Vega<span class="logo-pink">Hub</span>.pro</h1>
       <button onclick="showHome()" class="back-btn ml-auto mr-16">&larr; Home</button> 
       
-      <a href="https://t.me/vegahubpro" target="_blank" class="tg-icon">
+      <a href="https://t.me/vegahubb" target="_blank" class="tg-icon">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6">
       </a>
     </div>
@@ -508,12 +508,13 @@
 const MONETAG = "https://otieu.com/4/10245869";
 const OMDB_API_KEY = "a4ff55fe"; 
 const OMDB_BASE_URL = "https://www.omdbapi.com/";
-const DATA_FILE_URL = 'data/movies.json'; // ðŸ”‘ FIXED: Relative Path
-
-// ðŸ”‘ YOUTUBE API DETAILS
+const DATA_FILE_URL = 'data/movies.json'; 
 const YOUTUBE_API_KEY = "AIzaSyDT1RLcB16NDKXhkJrAPG2aeQfb464IGTA"; 
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
 
+// ðŸš€ Global State for Monetag Redirect Logic (SESSION FLAG)
+const MONETAG_SESSION_FLAG = 'monetag_seen_session'; // sessionStorage key
+const MONETAG_AD_REDIRECT_URL = MONETAG; 
 
 // ðŸš€ Category Color Mapping (No Change)
 const categoryColors = {
@@ -527,7 +528,7 @@ const categoryColors = {
 // ðŸŽ¬ Movies Data (Will be filled by fetchMoviesData)
 let movies = []; 
 
-let filtered = []; // Initially empty until data is fetched
+let filtered = []; 
 let page = 1;
 const perPage = 21;
 let currentMovie = null;
@@ -538,16 +539,14 @@ async function fetchMoviesData() {
     try {
         const response = await fetch(DATA_FILE_URL);
         if (!response.ok) {
-            // Log the full path that failed to help debugging
             console.error(`Failed to fetch data. Status: ${response.status}. Trying to access: ${new URL(DATA_FILE_URL, window.location.href).href}`);
             throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
         }
         const data = await response.json();
         
-        movies = data; // Populate the global movies array
-        filtered = [...movies]; // Initialize filtered list
+        movies = data; 
+        filtered = [...movies]; 
         
-        // Load movie details if hash is present (for direct links)
         if (window.location.hash.startsWith('#movie=')) {
             const imdbId = window.location.hash.substring(7);
             const movieToLoad = findMovieById(imdbId);
@@ -558,7 +557,7 @@ async function fetchMoviesData() {
                 render();
             }
         } else {
-            render(); // Render home page after fetching data
+            render(); 
         }
 
     } catch (error) {
@@ -577,7 +576,6 @@ function findMovieById(imdbId) {
 
 // ------------------- Utility Functions ---------------------
 
-// ðŸš¨ NEW: Request Browser Notification Permission on page load
 function requestNotificationPermission() {
     if ('Notification' in window) {
         Notification.requestPermission().then(permission => {
@@ -613,12 +611,10 @@ function setCategoryTheme(cat) {
 
 // ðŸ”‘ FIX: showHome function ko History API ke saath update kiya गया
 function showHome() {
-    // UI ko home page par le jao
     document.getElementById('detail-page').classList.add('hidden');
     document.getElementById('home-page').classList.remove('hidden');
     window.scrollTo(0,0);
     
-    // UI state ko reset karna (category filter, search, etc.)
     document.getElementById('search').value = '';
     document.getElementById('empty-search-state').classList.add('hidden');
     document.querySelectorAll('.cat-btn').forEach(x => x.classList.remove('active'));
@@ -628,9 +624,7 @@ function showHome() {
     page = 1;
     render();
     
-    // URL se hash (e.g., #movie=tt123) hata dein taki URL clean ho jaye
     if (window.location.hash) {
-        // history.replaceState ko Home state se replace kiya
         history.replaceState({ page: 'home' }, 'VegaHub Home', window.location.pathname + window.location.search);
     }
 }
@@ -682,10 +676,9 @@ async function fetchYouTubeTrailer(query) {
     }
 }
 
-// ðŸ”‘ NEW FUNCTION: Render Social Share Buttons
 function renderShareButtons(movieTitle, shareUrl) {
     const shareContainer = document.getElementById('share-buttons');
-    shareContainer.innerHTML = ''; // Clear previous buttons
+    shareContainer.innerHTML = ''; 
 
     const encodedUrl = encodeURIComponent(shareUrl);
     const encodedTitle = encodeURIComponent(`Watch ${movieTitle} in HD on VegaHub! - ${shareUrl}`);
@@ -697,7 +690,6 @@ function renderShareButtons(movieTitle, shareUrl) {
             name: "WhatsApp", 
             icon: "fab fa-whatsapp", 
             class: "share-whatsapp", 
-            // Web/Mobile friendly sharing
             url: `https://api.whatsapp.com/send?text=${encodedTitle}` 
         },
         { 
@@ -825,11 +817,11 @@ async function showDetail(movie, isPopstate = false) {
   const serversWithTrailer = [];
   if (videoId) {
       const trailerLink = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`;
-      serversWithTrailer.push({ name: "Official Trailer", link: trailerLink });
+      serversWithTrailer.push({ name: "Official Trailer", link: trailerLink, type: 'trailer' }); // type added
   }
 
   if (movie.servers && movie.servers.length > 0) {
-      serversWithTrailer.push(...movie.servers);
+      serversWithTrailer.push(...movie.servers.map(s => ({...s, type: 'watch'}))); // type added
   }
 
   // --- Content Check and Rendering (Updates for Download Buttons) ---
@@ -861,24 +853,43 @@ async function showDetail(movie, isPopstate = false) {
               
               btn.className = 'server-tab' + (isActive ? ' active':'');
               btn.textContent = server.name;
-              btn.onclick = () => {
-                  document.querySelectorAll('.server-tab').forEach(t => t.classList.remove('active'));
-                  btn.classList.add('active');
-                  iframe.src = server.link;
-              };
+
+              // NEW: Data attribute for Monetag flow
+              btn.setAttribute('data-target-url', server.link);
+              btn.setAttribute('data-target-type', server.type || 'watch');
+
+              // CRITICAL FIX: Ad flow सिर्फ़ Watch server पर लगाएं
+              if ((server.type || 'watch') === 'watch') {
+                   // Watch server buttons पर Monetag handler लगाएं
+                   btn.addEventListener('click', handleFirstClickMonetag); 
+              } else {
+                   // Trailer पर सीधा iframe load करें
+                   btn.onclick = () => {
+                       document.querySelectorAll('.server-tab').forEach(t => t.classList.remove('active'));
+                       btn.classList.add('active');
+                       iframe.src = server.link;
+                   };
+              }
               tabs.appendChild(btn);
 
               if (isActive) {
                   activeLink = server.link;
               }
           });
+          
           iframe.src = activeLink;
+          
+          const defaultActiveServer = serversWithTrailer.find(s => s.link === activeLink);
+          if (defaultActiveServer && defaultActiveServer.type !== 'trailer') {
+              iframe.src = defaultActiveServer.link;
+          }
+
       } else {
           tabs.innerHTML = '<div style="color:var(--text-color); text-align:center; font-style:italic;">No watch servers available yet.</div>';
           iframe.src = 'about:blank';
       }
 
-      // --- Download Buttons (UPDATED Logic for Custom GB/MB) ---
+      // --- Download Buttons (UPDATED Logic for Monetag Integration) ---
       if (hasDownloads) {
           Object.keys(movie.downloads).forEach(qKey => {
               const downloadData = movie.downloads[qKey];
@@ -888,22 +899,85 @@ async function showDetail(movie, isPopstate = false) {
               if(link && link !== "#") {
                   const a = document.createElement('a');
                   a.href = link;
-                  a.className = 'download-btn';
+                  a.className = 'download-btn monetag-trigger'; // ADDED CLASS for listener
                   a.textContent = labelText; 
-                  a.target = "_blank";
-                  a.onclick = (e) => {
-                      e.preventDefault();
-                      window.open(MONETAG, '_blank');
-                      setTimeout(() => window.open(a.href, '_blank'), 1000);
-                  };
+                  // NEW: Store the final destination URL
+                  a.setAttribute('data-target-url', link); 
+                  a.setAttribute('data-target-type', 'download'); // Type added
                   dl.appendChild(a);
               }
           });
+          // New: Attach listener to the dynamically created buttons after rendering
+          attachMonetagTrigger();
+          
       } else {
           dl.innerHTML = '<div style="color:var(--text-color); text-align:center; font-style:italic;">Download links are coming soon.</div>';
       }
   }
 }
+
+// -----------------------------------------------------------------------
+// ðŸ”‘ CORE FUNCTION: Per-Session First-Click Monetag Logic
+// -----------------------------------------------------------------------
+
+function handleFirstClickMonetag(event) {
+    event.preventDefault(); 
+    
+    const element = event.currentTarget; 
+    const targetUrl = element.getAttribute('data-target-url');
+    
+    if (!targetUrl) return;
+
+    // CHECK: sessionStorage में Flag देखें
+    const monetagSeen = sessionStorage.getItem(MONETAG_SESSION_FLAG);
+
+    if (!monetagSeen) {
+        // --- 1. FIRST CLICK (Session): Show Ad ---
+        
+        // SET: Ad देखने के बाद, Flag को sessionStorage में सेट करें
+        sessionStorage.setItem(MONETAG_SESSION_FLAG, 'true');
+        
+        // Fake History Entry push करें
+        history.pushState({ page: 'ad-redirect', type: 'monetag-interstitial', initialPage: window.location.href }, 'Ad Gateway', window.location.href);
+        
+        // user को Monetag ad URL पर redirect करें
+        window.location.href = MONETAG_AD_REDIRECT_URL; 
+        
+    } else {
+        // --- 2. SUBSEQUENT CLICK (Same Session): Go to Actual Target ---
+        
+        const targetType = element.getAttribute('data-target-type');
+        
+        if (targetType === 'download') {
+             // Download links के लिए नया टैब खोलें
+             window.open(targetUrl, '_blank');
+        } else if (targetType && targetType.startsWith('watch')) {
+            // Watch links के लिए iframe में लोड करें
+            const iframe = document.getElementById('movie-iframe');
+            if (iframe) {
+                 iframe.src = targetUrl;
+                 // UI अपडेट: Active tab सेट करें
+                 document.querySelectorAll('.server-tab').forEach(t => t.classList.remove('active'));
+                 element.classList.add('active');
+            }
+        }
+    }
+}
+
+
+function attachMonetagTrigger() {
+    // Select all download buttons created above
+    const buttons = document.querySelectorAll('.download-btn.monetag-trigger');
+
+    buttons.forEach(button => {
+        if (button.hasAttribute('data-listener-attached')) return;
+        
+        // Session First-Click Handler लगाएं
+        button.addEventListener('click', handleFirstClickMonetag); 
+        button.setAttribute('data-listener-attached', 'true');
+    });
+}
+
 
 // ------------------- General Functions ---------------------
 
@@ -920,7 +994,7 @@ async function render() {
       renderPagination(0); 
       return;
   }
-  if (movies.length === 0) return; // Wait for data to load if movies is empty
+  if (movies.length === 0) return; 
 
   for(let i=start; i<end; i++) {
     const m = filtered[i];
@@ -929,7 +1003,7 @@ async function render() {
     
     let cardThumbSrc = m.thumb_poster || (m.thumb && m.thumb !== '' ? m.thumb : '');
     
-    // OMDb fetch logic (left intact, but ideally should be pre-cached)
+    // OMDb fetch logic...
     if ((!m.thumb || m.thumb === 'https://thisisabrokenlink.com/404.jpg') && m.imdb_id && !m.thumb_poster) {
         const omdbDetails = await fetchOMDbDetails(m.imdb_id);
         if (omdbDetails && omdbDetails.Poster && omdbDetails.Poster !== 'N/A') {
@@ -1001,13 +1075,9 @@ document.getElementById('search').addEventListener('input', e => {
 // ------------------- INITIALIZATION & HISTORY HANDLERS ---------------------
 
 document.addEventListener('DOMContentLoaded', () => {
-    // NEW: Fetch data before initializing anything else
     fetchMoviesData(); 
-
-    // NEW: Request Notification Permission on Page Load
     requestNotificationPermission();
 
-    // Theme toggle logic
     const themeToggleBtn = document.getElementById('theme-toggle');
     const header = document.querySelector('.header');
     
@@ -1022,9 +1092,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     setCategoryTheme('all');
     
-    // ðŸ”‘ FIX: Back button (browser/mobile) press ko handle karne ke liye
+    // ðŸ”‘ CRITICAL FIX: Back button (browser/mobile) press ko handle karne ke liye
     window.addEventListener('popstate', (event) => {
-        // Since fetchMoviesData handles initial load, we only check for state change here
+        
+        // --- Handle Ad Redirection Back Click ---
+        if (event.state && event.state.page === 'ad-redirect') {
+            // Monetag Ad से वापस आने पर, user को पिछली Detail/Home state पर ही रहने दें।
+            console.log("Returned from Monetag Ad. User must click again for actual content.");
+        }
+        // --- END Ad Redirection Handler ---
+
+
+        // Existing Logic (Detail/Home navigation)
         if (!window.location.hash || (event.state && event.state.page === 'home')) {
             showHome();
         } else if (event.state && event.state.page === 'detail') {
@@ -1039,10 +1118,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // NOTE: Initial hash check is now inside fetchMoviesData()
 });
-</script>
 
+// ═══════════════════════════════════════════════════════════════════
+// VID SRC HD — DIRECT PLAYER 
+// ═══════════════════════════════════════════════════════════════════
+
+const vidsrcDirectMirrors = [
+  'https://vidsrc-embed.ru',
+  'https://vidsrc-embed.su',
+  'https://vidsrcme.su',
+  'https://vsrc.su', 
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const originalShowDetail = window.showDetail;
+
+  window.showDetail = async function(movie, isPopstate = false) {
+    // 1. Original showDetail logic चलाओ 
+    if (typeof originalShowDetail === 'function') {
+        await originalShowDetail(movie, isPopstate);
+    } 
+    
+
+    if (!movie.imdb_id) return;
+
+    const tabs = document.getElementById('server-tabs');
+    // Guard clause to prevent duplicating the button
+    if (!tabs || tabs.querySelector('.vidsrc-direct-btn')) {
+        return; 
+    }
+
+    const btn = document.createElement('div');
+    btn.className = 'server-tab vidsrc-direct-btn active';
+    btn.innerHTML = 'WATCH FULL MOVIE <span style="color:yellow;font-size:9px">HD DIRECT</span>';
+    btn.style.cssText = 'background: linear-gradient(135deg, #00ff9d, #00c853) !important; font-weight: 700; padding: 8px 12px; margin: 4px; border-radius: 6px; cursor: pointer;';
+
+    const imdbId = movie.imdb_id.startsWith('tt') ? movie.imdb_id : 'tt' + movie.imdb_id;
+    const isTV = movie.cat === 'web' || movie.type === 'tv';
+    
+    const randomIndex = Math.floor(Math.random() * vidsrcDirectMirrors.length);
+    const randomBase = vidsrcDirectMirrors[randomIndex];
+    
+    let directLink;
+
+    if (isTV) {
+        directLink = `${randomBase}/embed/tv/${imdbId}/1/1`;
+    } else {
+        directLink = `${randomBase}/embed/movie/${imdbId}`;
+    }
+    
+    // Vidsrc पर भी Monetag First-Click Logic लागू करें
+    btn.setAttribute('data-target-url', directLink);
+    btn.setAttribute('data-target-type', 'download'); // Treat as download/external link for window.open
+    
+    // Global First-Click Handler लगाएं
+    btn.addEventListener('click', handleFirstClickMonetag);
+
+
+    // Button को tabs में जोड़ो
+    tabs.appendChild(btn);
+
+    // Agar movie mein koi server nahi hai → auto open kar do
+    if (!movie.servers || movie.servers.length === 0) {
+      setTimeout(() => {
+          // sessionStorage से चेक करें
+          if (!sessionStorage.getItem(MONETAG_SESSION_FLAG)) {
+               // Ad नहीं देखा गया है, तो Ad flow शुरू करो
+               btn.click(); 
+          } else {
+               // Ad देखा जा चुका है, तो Vidsrc link सीधे खोल दो
+               window.open(directLink, '_blank');
+          }
+      }, 1200);
+    }
+  };
+});
+
+
+</script>
 
 </body>
 </html>

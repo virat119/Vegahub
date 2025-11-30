@@ -1,5 +1,25 @@
 [
   {
+    "title": "Tere ishq main",
+    "imdb_id": "tt28142095",
+    "thumb": "",
+    "cat": "bollywood",
+    "quality": "HDTC",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "Server1",
+        "link": "https://mxdrop.to/e/wlw08eppc3wqrk"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "1080 1.5GB",
+        "link": "https://mxdrop.to/f/wlw08eppc3wqrk"
+      }
+    }
+  },
+  {
     "title": "Stranger Things Season5",
     "imdb_id": "tt4574334",
     "thumb": "",
@@ -16,46 +36,6 @@
       "q1": {
         "label": "720 4GB",
         "link": "HHH"
-      }
-    }
-  },
-  {
-    "title": "Tere ishq mein",
-    "imdb_id": "tt28142095",
-    "thumb": "",
-    "cat": "bollywood",
-    "quality": "HDTC",
-    "year": "2025",
-    "servers": [
-      {
-        "name": "SERVER2",
-        "link": "HH"
-      }
-    ],
-    "downloads": {
-      "q1": {
-        "label": "10803gb",
-        "link": "hhh"
-      }
-    }
-  },
-  {
-    "title": "Tere ishq main",
-    "imdb_id": "tt28142095",
-    "thumb": "",
-    "cat": "bollywood",
-    "quality": "HDTC",
-    "year": "2025",
-    "servers": [
-      {
-        "name": "SERVER2",
-        "link": "HHHH"
-      }
-    ],
-    "downloads": {
-      "q1": {
-        "label": "720 -5gb",
-        "link": "uhj"
       }
     }
   },
@@ -80,26 +60,6 @@
     }
   },
   {
-    "title": "Titanic",
-    "imdb_id": "tt0120338",
-    "thumb": "",
-    "cat": "hollywood",
-    "quality": "4k",
-    "year": "1997",
-    "servers": [
-      {
-        "name": "Server1",
-        "link": "hhh"
-      }
-    ],
-    "downloads": {
-      "q1": {
-        "label": "720 - 5gb",
-        "link": "uuuu"
-      }
-    }
-  },
-  {
     "title": "Fateh",
     "imdb_id": "tt27679608",
     "thumb": "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/2025images/_Fateh-19347d40-b94f-11ef-a67e-a1d27b80970c.jpg",
@@ -109,7 +69,7 @@
     "servers": [
       {
         "name": "b1 ",
-        "link": "hh"
+        "link": "https://primeflicks.site"
       }
     ],
     "downloads": {
