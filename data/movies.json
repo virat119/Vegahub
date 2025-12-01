@@ -10,6 +10,7 @@
     "downloads": {}
   },
   {
+{
     "title": "Tere ishk main",
     "imdb_id": "tt28142095",
     "thumb": "",
@@ -19,6 +20,10 @@
     "servers": [
       {
         "name": "Server1",
+        "link": "https://dintezuvio.com/embed/slb21f6ewr3o"
+      },
+      {
+        "name": "Server2",
         "link": "https://mxdrop.to/e/wlw08eppc3wqrk"
       }
     ],
@@ -26,8 +31,13 @@
       "q1": {
         "label": "1080p 1.77GB",
         "link": "https://mxdrop.to/f/wlw08eppc3wqrk"
+      },
+      "q2": {
+        "label": "1080p 2.1GB",
+        "link": "https://dintezuvio.com/download/slb21f6ewr3o"
       }
     }
+
   },
   {
     "title": "Stranger Things Season5",
