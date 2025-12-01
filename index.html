@@ -6,9 +6,12 @@
   <title>VegaHub.pro - HD Movies 2025</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-  <style>
+
+
+
+<style>
     /* ------------------------------------- */
-    /* ðŸš€ THEME & COLOR VARIABLES (Dark Mode Default) */
+    /* 🚀 THEME & COLOR VARIABLES (Dark Mode Default) */
     /* ------------------------------------- */
     :root {
         /* General Colors */
@@ -26,7 +29,7 @@
         --dynamic-primary-shadow: rgba(255, 20, 147, 0.4);
     }
 
-    /* ðŸ’¡ Light Mode (Day Mode) Fixes */
+    /* 💡 Light Mode (Day Mode) Fixes */
     body.light-mode {
         --bg-color: #f0f0f0 !important; 
         --text-color: #111111; 
@@ -91,7 +94,7 @@
     .search { background: var(--input-bg); border-radius: 50px; padding: 12px 50px 12px 20px; font-size: 14px; width:100%; border:2px solid var(--input-border); color: var(--text-color);} 
     .search:focus { outline:none; border-color:var(--dynamic-primary); box-shadow:0 0 15px var(--dynamic-primary-shadow); }
     
-    /* ðŸ’¥ TELEGRAM ICON FIX: Positioning refined for better spacing */
+    /* 🔥 TELEGRAM ICON FIX: Positioning refined for better spacing */
     .tg-icon { 
         position: absolute; 
         top: 50%; 
@@ -183,29 +186,29 @@
     .synopsis-box h3 { font-size:17px; margin-bottom:8px; color:var(--dynamic-primary); } 
     .synopsis-box p { font-size:14px; color:var(--text-color); } 
 
-    /* Video Player & Controls (UPDATED DESIGN for BORDER) */
+    /* 🌟 Video Player & Controls (MODIFIED: Increased Border and Shadow) */
     .player-wrapper { 
         position: relative; 
         background: #000; 
         /* Border color is now a dynamic gradient for a more 'color-full' effect */
-        border: 5px solid transparent; 
+        border: 8px solid transparent; /* <--- MODIFIED: Border thickness increased */
         border-image: linear-gradient(45deg, var(--dynamic-primary), var(--dynamic-primary-gradient-end)) 1; 
         border-radius: 18px; 
         margin-bottom: 25px; 
-        box-shadow: 0 0 50px var(--dynamic-primary-shadow), 0 10px 30px rgba(0,0,0,0.9); 
+        box-shadow: 0 0 80px var(--dynamic-primary-shadow), 0 15px 40px rgba(0,0,0,0.9); /* <--- MODIFIED: Shadow increased for more glow */
         overflow: hidden; 
         transition: all 0.3s ease-in-out; 
     }
     .player-wrapper:hover {
         /* Slightly deeper shadow on hover */
-        box-shadow: 0 0 60px var(--dynamic-primary), 0 12px 35px var(--dynamic-primary-shadow);
+        box-shadow: 0 0 100px var(--dynamic-primary), 0 15px 45px var(--dynamic-primary-shadow); /* <--- MODIFIED: Hover Shadow increased */
         transform: translateY(-2px);
     }
     
-    /* Iframe Container (Unchanged - Responsive) */
+    /* ⬆️ Iframe Container (MODIFIED: Height Increased) */
     .video-container { 
         position:relative; 
-        padding-bottom:56.25%; 
+        padding-bottom:65%; /* <--- MODIFIED: Increased from 56.25% to 65% for a taller video player */
         height:0; 
         overflow:hidden; 
     }
@@ -368,7 +371,11 @@
       .detail-poster { max-width:160px; }
       .info-grid { grid-template-columns:1fr; }
     }
-  </style>
+</style>
+
+
+
+
 </head>
 <body>
 
