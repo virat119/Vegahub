@@ -1,5 +1,33 @@
 [
   {
+    "title": "Troll2",
+    "imdb_id": "tt27441481",
+    "thumb": "",
+    "cat": "hollywood",
+    "quality": "4k",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "Server1",
+        "link": "https://dintezuvio.com/embed/vf1wzjuzuepp"
+      },
+      {
+        "name": "server2",
+        "link": "https://mxdrop.to/e/r60mmqdes7me1w"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "720 1.09GB",
+        "link": "https://mxdrop.to/f/r60mmqdes7me1w"
+      },
+      "q2": {
+        "label": "1080 2.1GB",
+        "link": "https://dintezuvio.com/file/vf1wzjuzuepp"
+      }
+    }
+  },
+  {
     "title": "Coolie",
     "imdb_id": "tt27441481",
     "thumb": "",
