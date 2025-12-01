@@ -1,7 +1,32 @@
 [
   {
+    "title": "Game changer",
+    "imdb_id": "tt14209618",
+    "thumb": "",
+    "cat": "south",
+    "quality": "HD",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "server1",
+        "link": "#"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "720p",
+        "link": "#"
+      }
+    },
+    "screenshots": [
+      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/poster/game-changer1.jpg",
+      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/poster/game-changer2.jpg",
+      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/poster/game-changer3.jpg"
+    ]
+  },
+  {
     "title": "Troll2",
-    "imdb_id": "tt27441481",
+    "imdb_id": "tt29232158",
     "thumb": "",
     "cat": "hollywood",
     "quality": "4k",

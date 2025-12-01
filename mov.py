@@ -12,7 +12,9 @@ def get_new_movie_data():
     # 1. मुख्य डिटेल्स
     title = input("1. Title: ")
     imdb_id = input("2. IMDb ID (e.g., tt1234567): ")
-    cat_options = ["bollywood", "hollywood", "south", "web"]
+    
+    # --- Category Selection (Updated to include adult and netflix) ---
+    cat_options = ["bollywood", "hollywood", "south", "web", "adult", "netflix"]
     cat = input(f"3. Category ({'/'.join(cat_options)}): ").lower()
     while cat not in cat_options:
         cat = input(f"Invalid category. Choose from ({'/'.join(cat_options)}): ").lower()
@@ -44,6 +46,24 @@ def get_new_movie_data():
         # 'q1', 'q2', 'q3' key का उपयोग करें
         downloads[f"q{q_count}"] = {"label": label, "link": link}
         q_count += 1
+        
+    # 4. ⭐ NEW: स्क्रीनशॉट लिंक्स (Multiple Links) ⭐
+    screenshots = []
+    print("\n--- Screenshot Links (Image URLs, enter 'done' to finish) ---")
+    ss_count = 1
+    while True:
+        ss_link = input(f"Screenshot {ss_count} URL (type 'done'): ")
+        
+        if ss_link.lower() == 'done':
+            break
+            
+        # सुनिश्चित करें कि लिंक खाली नहीं है
+        if ss_link.strip():
+            screenshots.append(ss_link.strip()) # .strip() से अतिरिक्त स्पेस हट जाएगा
+            ss_count += 1
+        else:
+            print("Link cannot be empty. Try again or type 'done'.")
+
 
     new_movie = {
         "title": title,
@@ -53,7 +73,8 @@ def get_new_movie_data():
         "quality": quality,
         "year": year, 
         "servers": servers,
-        "downloads": downloads
+        "downloads": downloads,
+        "screenshots": screenshots  # ⭐ NEW: Screenshots array जोड़ा गया
     }
     return new_movie
 
@@ -93,3 +114,4 @@ if __name__ == "__main__":
     print("2. Commit changes: git commit -m 'Added new movie: {0}'".format(movie_data['title']))
     print("3. Push to GitHub: git push origin main")
     print("----------------------------")
+    
