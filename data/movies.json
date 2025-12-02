@@ -1,32 +1,51 @@
 [
   {
-    "title": "Game changer",
-    "imdb_id": "tt14209618",
+    "title": "Thama",
+    "tmdb_id": "1196364",
+    "imdb_id": "tt28102562",
     "thumb": "",
-    "cat": "south",
-    "quality": "HD",
+    "cat": "bollywood",
+    "quality": "WEB-DL",
     "year": "2025",
     "servers": [
       {
-        "name": "server1",
-        "link": "#"
+        "name": "Best player",
+        "link": "https://vegahub.rpmhub.site/#khamhf"
+      },
+      {
+        "name": "Server2",
+        "link": "https://mxdrop.to/e/vkqdgpxkinokxv"
+      },
+      {
+        "name": "Server3",
+        "link": "https://dintezuvio.com/embed/jhpm5fbfoo79"
       }
     ],
     "downloads": {
       "q1": {
-        "label": "720p",
-        "link": "#"
+        "label": "WEB-DL 1.2GB",
+        "link": "https://vegahub.rpmhub.site/#khamhf&dl=1"
+      },
+      "q2": {
+        "label": "Server2",
+        "link": "https://mxdrop.to/f/vkqdgpxkinokxv"
+      },
+      "q3": {
+        "label": "Server3",
+        "link": "https://dintezuvio.com/download/jhpm5fbfoo79"
       }
     },
     "screenshots": [
-      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/poster/game-changer1.jpg",
-      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/poster/game-changer2.jpg",
-      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/poster/game-changer3.jpg"
+      "https://files.catbox.moe/p5mvgl.webp",
+      "https://files.catbox.moe/gy6cqg.webp",
+      "https://files.catbox.moe/ahp438.webp",
+      "https://files.catbox.moe/z4tni7.webp"
     ]
   },
   {
     "title": "Troll2",
-    "imdb_id": "tt29232158",
+    "imdb_id": "tt27441481",
+    "tmdb_id": "1180831",
     "thumb": "",
     "cat": "hollywood",
     "quality": "4k",
@@ -50,21 +69,25 @@
         "label": "1080 2.1GB",
         "link": "https://dintezuvio.com/file/vf1wzjuzuepp"
       }
-    }
+    },
+    "screenshots": []
   },
   {
     "title": "Coolie",
     "imdb_id": "tt27441481",
+    "tmdb_id": "1153399",
     "thumb": "",
     "cat": "south",
     "quality": "HD",
     "year": "2025",
     "servers": [],
-    "downloads": {}
+    "downloads": {},
+    "screenshots": []
   },
   {
     "title": "Tere ishk main",
     "imdb_id": "tt28142095",
+    "tmdb_id": "1142921",
     "thumb": "",
     "cat": "bollywood",
     "quality": "HDTC",
@@ -88,13 +111,15 @@
         "label": "1080p 2.1GB",
         "link": "https://dintezuvio.com/download/slb21f6ewr3o"
       }
-    }
+    },
+    "screenshots": "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/2025images/_Fateh-19347d40-b94f-11ef-a67e-a1d27b80970c.jpg"
   },
   {
     "title": "Stranger Things Season5",
     "imdb_id": "tt4574334",
+    "tmdb_id": "66732",
     "thumb": "",
-    "cat": "web",
+    "cat": "netflix",
     "quality": "HD",
     "year": "2025",
     "servers": [
@@ -108,11 +133,13 @@
         "label": "720 4GB",
         "link": "HHH"
       }
-    }
+    },
+    "screenshots": []
   },
   {
     "title": "Titanic",
     "imdb_id": "tt0120338",
+    "tmdb_id": "597",
     "thumb": "",
     "cat": "hollywood",
     "quality": "4K",
@@ -128,19 +155,21 @@
         "label": "720 - 2gb",
         "link": "hh"
       }
-    }
+    },
+    "screenshots": []
   },
   {
     "title": "Fateh",
     "imdb_id": "tt27679608",
+    "tmdb_id": "955496",
     "thumb": "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/2025images/_Fateh-19347d40-b94f-11ef-a67e-a1d27b80970c.jpg",
     "cat": "bollywood",
     "quality": "HD",
     "year": "2025",
     "servers": [
       {
-        "name": "b1 ",
-        "link": "https://primeflicks.site"
+        "name": "# ",
+        "link": ""
       }
     ],
     "downloads": {
@@ -148,6 +177,11 @@
         "label": "720 - 4.5Gb done",
         "link": "hhhh"
       }
-    }
+    },
+    "screenshots": [
+      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/2025images/_Fateh-19347d40-b94f-11ef-a67e-a1d27b80970c.jpg",
+      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/2025images/_Fateh-19347d40-b94f-11ef-a67e-a1d27b80970c.jpg",
+      "https://raw.githubusercontent.com/virat119/viratu/refs/heads/main/screenshot_extra_2.jpg"
+    ]
   }
 ]

@@ -11,17 +11,21 @@ def get_new_movie_data():
     
     # 1. मुख्य डिटेल्स
     title = input("1. Title: ")
-    imdb_id = input("2. IMDb ID (e.g., tt1234567): ")
+    
+    # **⭐ NEW: TMDB ID प्रॉम्प्ट ⭐**
+    tmdb_id = input("2. TMDB ID (e.g., 12345): ") 
+    
+    imdb_id = input("3. IMDb ID (e.g., tt1234567): ")
     
     # --- Category Selection (Updated to include adult and netflix) ---
     cat_options = ["bollywood", "hollywood", "south", "web", "adult", "netflix"]
-    cat = input(f"3. Category ({'/'.join(cat_options)}): ").lower()
+    cat = input(f"4. Category ({'/'.join(cat_options)}): ").lower()
     while cat not in cat_options:
         cat = input(f"Invalid category. Choose from ({'/'.join(cat_options)}): ").lower()
         
-    quality = input("4. Quality (HD/4K/720p etc.): ")
-    thumb = input("5. Thumbnail/Poster URL (e.g., https://i.imgur.com/image.jpg): ")
-    year = input(f"6. Year ({time.strftime('%Y')} default): ") or str(time.strftime("%Y"))
+    quality = input("5. Quality (HD/4K/720p etc.): ")
+    thumb = input("6. Thumbnail/Poster URL (e.g., https://i.imgur.com/image.jpg): ")
+    year = input(f"7. Year ({time.strftime('%Y')} default): ") or str(time.strftime("%Y"))
 
     # 2. स्ट्रीम सर्वर लिंक
     servers = []
@@ -47,7 +51,7 @@ def get_new_movie_data():
         downloads[f"q{q_count}"] = {"label": label, "link": link}
         q_count += 1
         
-    # 4. ⭐ NEW: स्क्रीनशॉट लिंक्स (Multiple Links) ⭐
+    # 4. स्क्रीनशॉट लिंक्स (Multiple Links)
     screenshots = []
     print("\n--- Screenshot Links (Image URLs, enter 'done' to finish) ---")
     ss_count = 1
@@ -67,6 +71,7 @@ def get_new_movie_data():
 
     new_movie = {
         "title": title,
+        "tmdb_id": tmdb_id,   # ⭐ NEW: TMDB ID जोड़ा गया
         "imdb_id": imdb_id,
         "thumb": thumb,
         "cat": cat,
@@ -74,7 +79,7 @@ def get_new_movie_data():
         "year": year, 
         "servers": servers,
         "downloads": downloads,
-        "screenshots": screenshots  # ⭐ NEW: Screenshots array जोड़ा गया
+        "screenshots": screenshots
     }
     return new_movie
 
@@ -114,4 +119,3 @@ if __name__ == "__main__":
     print("2. Commit changes: git commit -m 'Added new movie: {0}'".format(movie_data['title']))
     print("3. Push to GitHub: git push origin main")
     print("----------------------------")
-    
