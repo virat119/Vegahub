@@ -1,5 +1,27 @@
 [
   {
+    "title": "Dhurandhar",
+    "tmdb_id": "1291608",
+    "imdb_id": "tt33014583",
+    "thumb": "",
+    "cat": "bollywood",
+    "quality": "HDTC",
+    "year": "2025",
+    "servers": [
+      {
+        "name": "Best Player",
+        "link": "https://h"
+      }
+    ],
+    "downloads": {
+      "q1": {
+        "label": "Mixdrop",
+        "link": "https://h"
+      }
+    },
+    "screenshots": []
+  },
+  {
     "title": "Thama",
     "tmdb_id": "1196364",
     "imdb_id": "tt28102562",
