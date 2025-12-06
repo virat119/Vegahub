@@ -1,6 +1,6 @@
 [
   {
-    "title": "Dhurandhar",
+    "title": "Dhurandar",
     "tmdb_id": "1291608",
     "imdb_id": "tt33014583",
     "thumb": "",
@@ -9,17 +9,38 @@
     "year": "2025",
     "servers": [
       {
-        "name": "Best Player",
-        "link": "https://h"
+        "name": "BEST PLAYER",
+        "link": "https://vegahub.rpmhub.site/#bfkgj5"
+      },
+      {
+        "name": "VID SRC",
+        "link": "https://is.gd/byTpTm"
+      },
+      {
+        "name": "MIXDROP",
+        "link": "https://is.gd/YhbLLU"
       }
     ],
     "downloads": {
       "q1": {
-        "label": "Mixdrop",
-        "link": "https://h"
+        "label": "SEREVER1 1.56GB 720P",
+        "link": "https://vegahub.rpmhub.site/#bfkgj5"
+      },
+      "q2": {
+        "label": "Server2 3.3GB 1080P",
+        "link": "https://is.gd/2QdPoR"
+      },
+      "q3": {
+        "label": "Server3",
+        "link": "https://is.gd/0z1Tq2"
       }
     },
-    "screenshots": []
+    "screenshots": [
+      "https://tinyurl.com/2bzy6jcx",
+      "https://tinyurl.com/2cpz2wfr",
+      "https://tinyurl.com/22ak264n",
+      "https://tinyurl.com/25u4ndvp"
+    ]
   },
   {
     "title": "Thama",
